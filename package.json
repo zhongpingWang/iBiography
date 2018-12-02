@@ -1,0 +1,25 @@
+{
+  "name": "ibiography",
+  "version": "1.0.0",
+  "description": "self",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhongpingWang/iBiography.git"
+  },
+  "keywords": [
+    "life"
+  ],
+  "author": "zpp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhongpingWang/iBiography/issues"
+  },
+  "homepage": "https://github.com/zhongpingWang/iBiography#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

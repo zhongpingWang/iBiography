@@ -1,8 +1,11 @@
 
 const express = require("express");
-
-import express from '';
-import Order from '../controller/v1/order'
 const router = express.Router();
 
-router.get('/v2/users/:user_id/orders', Order.getOrders)
+router.get('/',function(req, res, next){
+    res.writeHead(200,{"Content-Type":'application/json','charset':'utf-8'});
+    res.write(JSON.stringify({name:1234}));
+    res.end();
+})
+
+exports = module.exports = router;

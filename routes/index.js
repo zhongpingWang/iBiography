@@ -1,7 +1,7 @@
-'use strict';
 
-const userInfo = require('userInfo');
 
-exports.modules{
-	app.use('/promotion', userInfo);
-}
+const userInfo = require('./userInfo');
+
+exports = module.exports = function(app){
+	app.use('/userinfo', userInfo);
+};

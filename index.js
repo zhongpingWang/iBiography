@@ -27,7 +27,6 @@ const MongoStore = connectMongo(session);
 
 app.use(cookieParser());
 
-console.log(JSON.stringify(config))
 
 app.use(session({
     name: config.session.name,
@@ -43,9 +42,32 @@ app.use(session({
     })
 }))
 
+
+app.all('*', (req, res, next) => {
+	const {
+		origin,
+		Origin,
+		referer,
+		Referer
+	} = req.headers;
+	const allowOrigin = origin || Origin || referer || Referer || '*';
+	res.header("Access-Control-Allow-Origin", allowOrigin);
+	res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+	res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+	res.header("Access-Control-Allow-Credentials", true); //可以带cookies
+	res.header("X-Powered-By", 'Express');
+	if (req.method == 'OPTIONS') {
+		res.sendStatus(200);
+	} else {
+		next();
+	}
+});
+
+
 app.get('/page/index**', (req, res) => res.render('index', {
     title: "我的页面" 
 }));
+
 
 router(app);
 

@@ -16,11 +16,12 @@ class userInfo extends baseModel {
             passWord: String,
             age: Number,
             address: String,
+            posi:String,
         }));
-    }
+    } 
 
 }
 
+const userInfoIns = new userInfo();
 
-
-modules = module.exports = new userInfo();
+modules = module.exports = userInfoIns;

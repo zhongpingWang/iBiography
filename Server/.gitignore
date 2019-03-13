@@ -1,6 +1,7 @@
-#忽略windows生成的缩略图文件
-Thunbs.db
-#忽略Visual Studio生成时的产生的文件
+
+#Ignore thumbnails created by Windows
+Thumbs.db
+#Ignore files built by Visual Studio
 *.obj
 *.exe
 *.pdb
@@ -24,5 +25,9 @@ Thunbs.db
 *.sbr
 obj/
 [Rr]elease*/
-_ReSharper*
+_ReSharper*/
+[Tt]est[Rr]esult*
+.vs/
+#Nuget packages folder
+packages/
 node_modules

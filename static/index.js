@@ -1,58 +1,32 @@
+import Vue from 'vue'
+//import store from './store'
+import router from './router/index'
+import "./css/index.less"
 
- 
+// import filters from './vueComm/filters'
+// import directives from './vueComm/directives'
+// //注册组件
+// import "./vueComm/components/elementUI/importElementUI"
+// import "./vueComm/components/regComponents"
 
- var Index = {
+//注册全局通用方法
+// import Comm from "./js/comm"
+// Vue.prototype.Comm = Comm
 
-    init:function(){
-        //ie11 需要 设置contenteditable 为true
-        $("#imgBox").height(400).attr("contenteditable",true).text(123);
+import jquery from "jquery"
+window.$ = jquery;
 
-        this.initEvent();
-    },
-
-    initEvent:function(){
-
-        $("body").on("paste",function(event){
-
-            var e = event.originalEvent;
-
-            if(!e){
-                return;
-            }
-
-            var items = e.clipboardData.items;
-            for(var i = 0; i < items.length; ++i)
-            {
-                // 如果剪贴板中的内容类型是图片文件
-                if (items[i].kind == 'file' && items[i].type.indexOf('image/') >= 0)
-                {
-                    e.preventDefault();
-
-                    var blob = items[i].getAsFile();
-
-                    if (blob.size === 0) {
-                        return;
-                    }
-
-                    var reader = new FileReader();
-
-                    reader.onload=function(data){
-
-                        var img = document.createElement("img");
-                        img.src = data.target.result; 
-                        $("#imgBox").append(img); 
-            
-                    };
-        
-                    reader.readAsDataURL(blob); 
-
-                };
-            };
-        });
-    }
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
 
 
- }
+window.$eventBus = new Vue();
 
+import RouterApp from './src/App';
 
- Index.init();
+new Vue({
+    el: '#app',
+    router,
+    render: h => h(RouterApp)
+})

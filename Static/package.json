@@ -45,6 +45,7 @@
 				"webpack-parallel-uglify-plugin": "^1.1.0"
 		},
 		"devDependencies": {
-				"element-ui": "^2.5.2"
+				"element-ui": "^2.5.2",
+				"isomorphic-fetch": "^2.2.1"
 		}
 }

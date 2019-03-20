@@ -21,16 +21,31 @@ class baseModel {
     }
 
     resJSON(res,data){
+
+
         res.writeHead(200,{"Content-Type":'application/json','charset':'utf-8'});
 
         var resData = {
-            code:0,
+            code: 0,
             data:data
         }
 
         res.write(JSON.stringify(resData));
         res.end();
     }
+
+    resError(res,msg){
+
+        res.writeHead(200,{"Content-Type":'application/json','charset':'utf-8'});
+
+        var resData = {
+            code: -1,
+            message:msg
+        }
+
+        res.write(JSON.stringify(resData));
+        res.end();
+    } 
 
 }
 

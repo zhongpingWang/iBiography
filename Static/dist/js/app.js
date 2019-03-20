@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "./dist";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,6 +71,36 @@ module.exports = _dll_libs;
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(0))(2);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(0))(71);
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var REGISTER_USER = exports.REGISTER_USER = 'REGISTER_USER';
+
+var FETCH_USER = exports.FETCH_USER = 'FETCH_USER';
+
+var DEL_USERINFO = exports.DEL_USERINFO = 'DEL_USERINFO';
+
+var UPDATE_USER = exports.UPDATE_USER = 'UPDATE_USER';
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -179,14 +209,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(0))(2);
-
-/***/ }),
-/* 3 */,
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -195,36 +218,126 @@ module.exports = (__webpack_require__(0))(2);
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = {};
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _vuex = __webpack_require__(2);
+
+__webpack_require__(19);
+
+exports.default = {
+    data: function data() {
+        return {
+            txtId: '',
+            txtName: '',
+            txtPwd: '',
+            txtAge: '',
+            txtAdress: ''
+        };
+    },
+
+
+    computed: _extends({}, (0, _vuex.mapGetters)({
+        RegisterStore: "RegisterStore/RegisterStore"
+    })),
+
+    methods: _extends({}, (0, _vuex.mapActions)({
+        regiterUser: "RegisterStore/regiterUser",
+        fetchUser: "RegisterStore/fetchUser",
+        delUser: "RegisterStore/delUser",
+        updateUser: "RegisterStore/updateUser"
+
+    }), {
+        _getMe: function _getMe() {
+            $.get({
+                url: "/ibiography/userinfo/me"
+            });
+        },
+        _login: function _login() {
+
+            $.post({
+                url: "/ibiography/userinfo/login",
+                data: {
+                    _id: this.txtId
+                }
+            });
+        },
+        _loginOut: function _loginOut() {
+            $.get({
+                url: "/ibiography/userinfo/loginout"
+            });
+        },
+        _regSubmit: function _regSubmit() {
+
+            var data = {
+                userName: this.txtName,
+                passWord: this.txtPwd,
+                age: this.txtAge,
+                address: this.txtAdress,
+                posi: "-"
+            };
+
+            this.regiterUser({ data: data });
+        },
+        _fetchUser: function _fetchUser() {
+            this.fetchUser();
+        },
+        _delUser: function _delUser(item) {
+
+            this.delUser({
+                data: { _id: item._id }
+            });
+        },
+        _updateUser: function _updateUser() {
+
+            var data = {
+                _id: this.txtId,
+                userName: this.txtName,
+                passWord: this.txtPwd,
+                age: this.txtAge,
+                address: this.txtAdress
+
+            };
+
+            this.updateUser({ data: data });
+        }
+    }),
+
+    mounted: function mounted() {}
+};
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _vue = __webpack_require__(2);
+var _vue = __webpack_require__(1);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _index = __webpack_require__(6);
+var _Index = __webpack_require__(7);
+
+var _Index2 = _interopRequireDefault(_Index);
+
+var _index = __webpack_require__(16);
 
 var _index2 = _interopRequireDefault(_index);
 
-__webpack_require__(13);
+__webpack_require__(21);
 
-var _jquery = __webpack_require__(14);
+var _jquery = __webpack_require__(22);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _elementUi = __webpack_require__(15);
+var _elementUi = __webpack_require__(23);
 
 var _elementUi2 = _interopRequireDefault(_elementUi);
 
-__webpack_require__(16);
+__webpack_require__(24);
 
-var _App = __webpack_require__(17);
+var _App = __webpack_require__(25);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -238,6 +351,7 @@ window.$eventBus = new _vue2.default();
 
 new _vue2.default({
     el: '#app',
+    store: _Index2.default,
     router: _index2.default,
     render: function render(h) {
         return h(_App2.default);
@@ -245,7 +359,49 @@ new _vue2.default({
 });
 
 /***/ }),
-/* 6 */
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(1);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vuex = __webpack_require__(2);
+
+var _vuex2 = _interopRequireDefault(_vuex);
+
+var _Index = __webpack_require__(9);
+
+var _Index2 = _interopRequireDefault(_Index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_vue2.default.use(_vuex2.default);
+
+var debug = process.env.NODE_ENV !== 'production';
+
+exports.default = new _vuex2.default.Store({
+  modules: {
+    RegisterStore: _Index2.default },
+  strict: debug
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = (__webpack_require__(0))(7);
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -255,15 +411,967 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _vue = __webpack_require__(2);
+var _Actions = __webpack_require__(10);
+
+var _Actions2 = _interopRequireDefault(_Actions);
+
+var _Mutations = __webpack_require__(15);
+
+var _Mutations2 = _interopRequireDefault(_Mutations);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var state = {
+
+  UserList: [],
+
+  pageIndex: 1,
+
+  WSRoot: []
+};
+
+var getters = {
+  RegisterStore: function RegisterStore(state) {
+    return state;
+  }
+};
+
+exports.default = {
+  namespaced: true,
+  state: state,
+  getters: getters,
+  actions: _Actions2.default,
+  mutations: _Mutations2.default
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _MutationType = __webpack_require__(3);
+
+var MutationType = _interopRequireWildcard(_MutationType);
+
+var _Http = __webpack_require__(11);
+
+var _Http2 = _interopRequireDefault(_Http);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+exports.default = {
+  regiterUser: function regiterUser(_ref, payloay) {
+    var dispatch = _ref.dispatch,
+        commit = _ref.commit,
+        state = _ref.state,
+        rootState = _ref.rootState;
+
+    _Http2.default.post({
+      URLType: 'regiterUser',
+      data: payloay.data
+    }, function (data) {
+      debugger;
+
+      commit(MutationType.REGISTER_USER, { data: data });
+    });
+  },
+  fetchUser: function fetchUser(_ref2, payloay) {
+    var dispatch = _ref2.dispatch,
+        commit = _ref2.commit,
+        state = _ref2.state,
+        rootState = _ref2.rootState;
+
+    _Http2.default.fetch({
+      URLType: 'fetchUser'
+    }, function (data) {
+
+      if (data.code == 0) {
+        commit(MutationType.FETCH_USER, { data: data });
+      }
+    });
+  },
+  delUser: function delUser(_ref3, payloay) {
+    var dispatch = _ref3.dispatch,
+        commit = _ref3.commit,
+        state = _ref3.state,
+        rootState = _ref3.rootState;
+
+
+    _Http2.default.delete({
+      URLType: 'delUser',
+      data: payloay.data
+    }, function (data) {
+
+      if (data.code == 0) {
+        commit(MutationType.DEL_USERINFO, payloay);
+      }
+    });
+  },
+  updateUser: function updateUser(_ref4, payloay) {
+    var dispatch = _ref4.dispatch,
+        commit = _ref4.commit;
+
+
+    _Http2.default.put({
+      URLType: "updateUser",
+      data: payloay.data
+    }, function (data) {
+
+      if (data.code == 0) {
+        commit(MutationType.UPDATE_USER, payloay.data);
+      }
+    });
+  }
+};
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+__webpack_require__(12);
+
+var _url = __webpack_require__(14);
+
+var _url2 = _interopRequireDefault(_url);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+	fetch: function fetch(data, callback) {
+
+		if (!data) {
+			return;
+		}
+
+		var url = this.getUrlByType(data),
+		    that = this;
+
+		data.url = url;
+
+		delete data.outerData;
+		delete data.URLType;
+
+		data.success = function (data, text, res) {
+
+			if (typeof data == "string") {
+				if (JSON && JSON.parse) {
+					data = JSON.parse(data);
+				} else {
+					data = $.parseJSON(data);
+				}
+			}
+
+			if (data.code == 10004) {
+				window.location.href = data.data;
+				return false;
+			}
+
+			if (data.code != 0 && data.code != undefined) {
+				console.log(data.message);
+			}
+
+			if ($.isFunction(callback)) {
+				if (data.code == 0 || data.code == undefined) {
+					callback(data);
+				} else {
+					console.log(data.message);
+				}
+			}
+		};
+
+		data.error = function (data) {
+			if (data.responseText == "文件不存在") {
+
+				console.log(data.message);
+
+				var timer = setTimeout(function () {
+					clearTimeout(timer);
+					location.href = "/document/" + App.workspaceId;
+				}, 1000);
+			} else {
+				callback(false);
+			}
+		};
+
+		return $.ajax(data);
+	},
+	post: function post(data, callback) {
+		data.headers = {
+			"Content-Type": "application/json"
+		};
+
+		data.type = "POST";
+
+		data.data = JSON.stringify(data.data);
+
+		return this.fetch(data, callback);
+	},
+	delete: function _delete(data, callback) {
+
+		data.type = "delete";
+
+		data.headers = {
+			"Content-Type": "application/json"
+		};
+		data.data = JSON.stringify(data.data);
+		return this.fetch(data, callback);
+	},
+	put: function put(data, callback) {
+
+		data.type = "put";
+
+		data.headers = {
+			"Content-Type": "application/json"
+		};
+		data.data = JSON.stringify(data.data);
+		return this.fetch(data, callback);
+	},
+	upload: function upload(data, callback) {
+
+		if (!data) {
+			return;
+		}
+
+		var url = this.getUrlByType(data),
+		    file = data.data.file,
+		    that = this;
+
+		data.url = url;
+
+		delete data.outerData;
+		delete data.URLType;
+
+		var formdata = new FormData();
+		formdata.append("fileName", file.name);
+		formdata.append("size", file.size);
+		formdata.append("file", file);
+
+		return $.ajax({
+			method: "post",
+			url: url,
+			processData: false,
+
+			contentType: false,
+			data: formdata,
+			xhr: function xhr() {
+				var xhr = $.ajaxSettings.xhr();
+
+				if (xhr.upload && _typeof(xhr.upload.onprogress) == "object") {
+					if (data.progress) {
+						xhr.upload.addEventListener("progress", data.progress, false);
+					}
+				}
+				return xhr;
+			}
+		}).done(function (data) {
+
+			if (data.code != undefined && data.code != 0) {
+				console.log(data.message);
+				return;
+			}
+			if (data.code != undefined && data.code != 0) {
+				console.log(data.message);
+				return;
+			}
+
+			typeof callback == "function" && callback(data);
+		});
+	},
+
+	getUrlByType: function getUrlByType(data) {
+		if (data.url) {
+			return data.url;
+		}
+
+		var url = _url2.default.Settings.hostname + _url2.default.URL[data.URLType];
+
+		if (!url) {
+			url = _url2.default.DEBUGURL[data.URLType];
+		}
+
+		if (!url) {
+			alert(data.URLtype + " 未定义");
+		}
+
+		var urlPars = url.match(/\{([\s\S]+?(\}?)+)\}/g),
+		    temp = data.data || {},
+		    outerData = data.outerData || {};
+
+		if (typeof temp == 'string') {
+			temp = JSON.parse(temp);
+		}
+
+		if (temp.length) {
+			data = {};
+		}
+
+		for (var key in outerData) {
+			temp[key] = outerData[key];
+		}
+
+		if (urlPars) {
+			for (var i = 0; i < urlPars.length; i++) {
+
+				var rex = urlPars[i],
+				    par = rex.replace(/[{|}]/g, ""),
+				    val = temp[par];
+				url = url.replace(rex, val);
+			}
+		}
+
+		if (url.indexOf("?") > -1) {
+			url += "&t=" + +new Date();
+		} else {
+			url += '?t=' + +new Date();
+		}
+
+		return url;
+	}
+
+};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// the whatwg-fetch polyfill installs the fetch() function
+// on the global object (window or self)
+//
+// Return that as the export for use in Webpack, Browserify etc.
+__webpack_require__(13);
+module.exports = self.fetch.bind(self);
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["Headers"] = Headers;
+/* harmony export (immutable) */ __webpack_exports__["Request"] = Request;
+/* harmony export (immutable) */ __webpack_exports__["Response"] = Response;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DOMException", function() { return DOMException; });
+/* harmony export (immutable) */ __webpack_exports__["fetch"] = fetch;
+var support = {
+  searchParams: 'URLSearchParams' in self,
+  iterable: 'Symbol' in self && 'iterator' in Symbol,
+  blob:
+    'FileReader' in self &&
+    'Blob' in self &&
+    (function() {
+      try {
+        new Blob()
+        return true
+      } catch (e) {
+        return false
+      }
+    })(),
+  formData: 'FormData' in self,
+  arrayBuffer: 'ArrayBuffer' in self
+}
+
+function isDataView(obj) {
+  return obj && DataView.prototype.isPrototypeOf(obj)
+}
+
+if (support.arrayBuffer) {
+  var viewClasses = [
+    '[object Int8Array]',
+    '[object Uint8Array]',
+    '[object Uint8ClampedArray]',
+    '[object Int16Array]',
+    '[object Uint16Array]',
+    '[object Int32Array]',
+    '[object Uint32Array]',
+    '[object Float32Array]',
+    '[object Float64Array]'
+  ]
+
+  var isArrayBufferView =
+    ArrayBuffer.isView ||
+    function(obj) {
+      return obj && viewClasses.indexOf(Object.prototype.toString.call(obj)) > -1
+    }
+}
+
+function normalizeName(name) {
+  if (typeof name !== 'string') {
+    name = String(name)
+  }
+  if (/[^a-z0-9\-#$%&'*+.^_`|~]/i.test(name)) {
+    throw new TypeError('Invalid character in header field name')
+  }
+  return name.toLowerCase()
+}
+
+function normalizeValue(value) {
+  if (typeof value !== 'string') {
+    value = String(value)
+  }
+  return value
+}
+
+// Build a destructive iterator for the value list
+function iteratorFor(items) {
+  var iterator = {
+    next: function() {
+      var value = items.shift()
+      return {done: value === undefined, value: value}
+    }
+  }
+
+  if (support.iterable) {
+    iterator[Symbol.iterator] = function() {
+      return iterator
+    }
+  }
+
+  return iterator
+}
+
+function Headers(headers) {
+  this.map = {}
+
+  if (headers instanceof Headers) {
+    headers.forEach(function(value, name) {
+      this.append(name, value)
+    }, this)
+  } else if (Array.isArray(headers)) {
+    headers.forEach(function(header) {
+      this.append(header[0], header[1])
+    }, this)
+  } else if (headers) {
+    Object.getOwnPropertyNames(headers).forEach(function(name) {
+      this.append(name, headers[name])
+    }, this)
+  }
+}
+
+Headers.prototype.append = function(name, value) {
+  name = normalizeName(name)
+  value = normalizeValue(value)
+  var oldValue = this.map[name]
+  this.map[name] = oldValue ? oldValue + ', ' + value : value
+}
+
+Headers.prototype['delete'] = function(name) {
+  delete this.map[normalizeName(name)]
+}
+
+Headers.prototype.get = function(name) {
+  name = normalizeName(name)
+  return this.has(name) ? this.map[name] : null
+}
+
+Headers.prototype.has = function(name) {
+  return this.map.hasOwnProperty(normalizeName(name))
+}
+
+Headers.prototype.set = function(name, value) {
+  this.map[normalizeName(name)] = normalizeValue(value)
+}
+
+Headers.prototype.forEach = function(callback, thisArg) {
+  for (var name in this.map) {
+    if (this.map.hasOwnProperty(name)) {
+      callback.call(thisArg, this.map[name], name, this)
+    }
+  }
+}
+
+Headers.prototype.keys = function() {
+  var items = []
+  this.forEach(function(value, name) {
+    items.push(name)
+  })
+  return iteratorFor(items)
+}
+
+Headers.prototype.values = function() {
+  var items = []
+  this.forEach(function(value) {
+    items.push(value)
+  })
+  return iteratorFor(items)
+}
+
+Headers.prototype.entries = function() {
+  var items = []
+  this.forEach(function(value, name) {
+    items.push([name, value])
+  })
+  return iteratorFor(items)
+}
+
+if (support.iterable) {
+  Headers.prototype[Symbol.iterator] = Headers.prototype.entries
+}
+
+function consumed(body) {
+  if (body.bodyUsed) {
+    return Promise.reject(new TypeError('Already read'))
+  }
+  body.bodyUsed = true
+}
+
+function fileReaderReady(reader) {
+  return new Promise(function(resolve, reject) {
+    reader.onload = function() {
+      resolve(reader.result)
+    }
+    reader.onerror = function() {
+      reject(reader.error)
+    }
+  })
+}
+
+function readBlobAsArrayBuffer(blob) {
+  var reader = new FileReader()
+  var promise = fileReaderReady(reader)
+  reader.readAsArrayBuffer(blob)
+  return promise
+}
+
+function readBlobAsText(blob) {
+  var reader = new FileReader()
+  var promise = fileReaderReady(reader)
+  reader.readAsText(blob)
+  return promise
+}
+
+function readArrayBufferAsText(buf) {
+  var view = new Uint8Array(buf)
+  var chars = new Array(view.length)
+
+  for (var i = 0; i < view.length; i++) {
+    chars[i] = String.fromCharCode(view[i])
+  }
+  return chars.join('')
+}
+
+function bufferClone(buf) {
+  if (buf.slice) {
+    return buf.slice(0)
+  } else {
+    var view = new Uint8Array(buf.byteLength)
+    view.set(new Uint8Array(buf))
+    return view.buffer
+  }
+}
+
+function Body() {
+  this.bodyUsed = false
+
+  this._initBody = function(body) {
+    this._bodyInit = body
+    if (!body) {
+      this._bodyText = ''
+    } else if (typeof body === 'string') {
+      this._bodyText = body
+    } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+      this._bodyBlob = body
+    } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+      this._bodyFormData = body
+    } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+      this._bodyText = body.toString()
+    } else if (support.arrayBuffer && support.blob && isDataView(body)) {
+      this._bodyArrayBuffer = bufferClone(body.buffer)
+      // IE 10-11 can't handle a DataView body.
+      this._bodyInit = new Blob([this._bodyArrayBuffer])
+    } else if (support.arrayBuffer && (ArrayBuffer.prototype.isPrototypeOf(body) || isArrayBufferView(body))) {
+      this._bodyArrayBuffer = bufferClone(body)
+    } else {
+      this._bodyText = body = Object.prototype.toString.call(body)
+    }
+
+    if (!this.headers.get('content-type')) {
+      if (typeof body === 'string') {
+        this.headers.set('content-type', 'text/plain;charset=UTF-8')
+      } else if (this._bodyBlob && this._bodyBlob.type) {
+        this.headers.set('content-type', this._bodyBlob.type)
+      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+        this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+      }
+    }
+  }
+
+  if (support.blob) {
+    this.blob = function() {
+      var rejected = consumed(this)
+      if (rejected) {
+        return rejected
+      }
+
+      if (this._bodyBlob) {
+        return Promise.resolve(this._bodyBlob)
+      } else if (this._bodyArrayBuffer) {
+        return Promise.resolve(new Blob([this._bodyArrayBuffer]))
+      } else if (this._bodyFormData) {
+        throw new Error('could not read FormData body as blob')
+      } else {
+        return Promise.resolve(new Blob([this._bodyText]))
+      }
+    }
+
+    this.arrayBuffer = function() {
+      if (this._bodyArrayBuffer) {
+        return consumed(this) || Promise.resolve(this._bodyArrayBuffer)
+      } else {
+        return this.blob().then(readBlobAsArrayBuffer)
+      }
+    }
+  }
+
+  this.text = function() {
+    var rejected = consumed(this)
+    if (rejected) {
+      return rejected
+    }
+
+    if (this._bodyBlob) {
+      return readBlobAsText(this._bodyBlob)
+    } else if (this._bodyArrayBuffer) {
+      return Promise.resolve(readArrayBufferAsText(this._bodyArrayBuffer))
+    } else if (this._bodyFormData) {
+      throw new Error('could not read FormData body as text')
+    } else {
+      return Promise.resolve(this._bodyText)
+    }
+  }
+
+  if (support.formData) {
+    this.formData = function() {
+      return this.text().then(decode)
+    }
+  }
+
+  this.json = function() {
+    return this.text().then(JSON.parse)
+  }
+
+  return this
+}
+
+// HTTP methods whose capitalization should be normalized
+var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
+
+function normalizeMethod(method) {
+  var upcased = method.toUpperCase()
+  return methods.indexOf(upcased) > -1 ? upcased : method
+}
+
+function Request(input, options) {
+  options = options || {}
+  var body = options.body
+
+  if (input instanceof Request) {
+    if (input.bodyUsed) {
+      throw new TypeError('Already read')
+    }
+    this.url = input.url
+    this.credentials = input.credentials
+    if (!options.headers) {
+      this.headers = new Headers(input.headers)
+    }
+    this.method = input.method
+    this.mode = input.mode
+    this.signal = input.signal
+    if (!body && input._bodyInit != null) {
+      body = input._bodyInit
+      input.bodyUsed = true
+    }
+  } else {
+    this.url = String(input)
+  }
+
+  this.credentials = options.credentials || this.credentials || 'same-origin'
+  if (options.headers || !this.headers) {
+    this.headers = new Headers(options.headers)
+  }
+  this.method = normalizeMethod(options.method || this.method || 'GET')
+  this.mode = options.mode || this.mode || null
+  this.signal = options.signal || this.signal
+  this.referrer = null
+
+  if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+    throw new TypeError('Body not allowed for GET or HEAD requests')
+  }
+  this._initBody(body)
+}
+
+Request.prototype.clone = function() {
+  return new Request(this, {body: this._bodyInit})
+}
+
+function decode(body) {
+  var form = new FormData()
+  body
+    .trim()
+    .split('&')
+    .forEach(function(bytes) {
+      if (bytes) {
+        var split = bytes.split('=')
+        var name = split.shift().replace(/\+/g, ' ')
+        var value = split.join('=').replace(/\+/g, ' ')
+        form.append(decodeURIComponent(name), decodeURIComponent(value))
+      }
+    })
+  return form
+}
+
+function parseHeaders(rawHeaders) {
+  var headers = new Headers()
+  // Replace instances of \r\n and \n followed by at least one space or horizontal tab with a space
+  // https://tools.ietf.org/html/rfc7230#section-3.2
+  var preProcessedHeaders = rawHeaders.replace(/\r?\n[\t ]+/g, ' ')
+  preProcessedHeaders.split(/\r?\n/).forEach(function(line) {
+    var parts = line.split(':')
+    var key = parts.shift().trim()
+    if (key) {
+      var value = parts.join(':').trim()
+      headers.append(key, value)
+    }
+  })
+  return headers
+}
+
+Body.call(Request.prototype)
+
+function Response(bodyInit, options) {
+  if (!options) {
+    options = {}
+  }
+
+  this.type = 'default'
+  this.status = options.status === undefined ? 200 : options.status
+  this.ok = this.status >= 200 && this.status < 300
+  this.statusText = 'statusText' in options ? options.statusText : 'OK'
+  this.headers = new Headers(options.headers)
+  this.url = options.url || ''
+  this._initBody(bodyInit)
+}
+
+Body.call(Response.prototype)
+
+Response.prototype.clone = function() {
+  return new Response(this._bodyInit, {
+    status: this.status,
+    statusText: this.statusText,
+    headers: new Headers(this.headers),
+    url: this.url
+  })
+}
+
+Response.error = function() {
+  var response = new Response(null, {status: 0, statusText: ''})
+  response.type = 'error'
+  return response
+}
+
+var redirectStatuses = [301, 302, 303, 307, 308]
+
+Response.redirect = function(url, status) {
+  if (redirectStatuses.indexOf(status) === -1) {
+    throw new RangeError('Invalid status code')
+  }
+
+  return new Response(null, {status: status, headers: {location: url}})
+}
+
+var DOMException = self.DOMException
+try {
+  new DOMException()
+} catch (err) {
+  DOMException = function(message, name) {
+    this.message = message
+    this.name = name
+    var error = Error(message)
+    this.stack = error.stack
+  }
+  DOMException.prototype = Object.create(Error.prototype)
+  DOMException.prototype.constructor = DOMException
+}
+
+function fetch(input, init) {
+  return new Promise(function(resolve, reject) {
+    var request = new Request(input, init)
+
+    if (request.signal && request.signal.aborted) {
+      return reject(new DOMException('Aborted', 'AbortError'))
+    }
+
+    var xhr = new XMLHttpRequest()
+
+    function abortXhr() {
+      xhr.abort()
+    }
+
+    xhr.onload = function() {
+      var options = {
+        status: xhr.status,
+        statusText: xhr.statusText,
+        headers: parseHeaders(xhr.getAllResponseHeaders() || '')
+      }
+      options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL')
+      var body = 'response' in xhr ? xhr.response : xhr.responseText
+      resolve(new Response(body, options))
+    }
+
+    xhr.onerror = function() {
+      reject(new TypeError('Network request failed'))
+    }
+
+    xhr.ontimeout = function() {
+      reject(new TypeError('Network request failed'))
+    }
+
+    xhr.onabort = function() {
+      reject(new DOMException('Aborted', 'AbortError'))
+    }
+
+    xhr.open(request.method, request.url, true)
+
+    if (request.credentials === 'include') {
+      xhr.withCredentials = true
+    } else if (request.credentials === 'omit') {
+      xhr.withCredentials = false
+    }
+
+    if ('responseType' in xhr && support.blob) {
+      xhr.responseType = 'blob'
+    }
+
+    request.headers.forEach(function(value, name) {
+      xhr.setRequestHeader(name, value)
+    })
+
+    if (request.signal) {
+      request.signal.addEventListener('abort', abortXhr)
+
+      xhr.onreadystatechange = function() {
+        // DONE (success or failure)
+        if (xhr.readyState === 4) {
+          request.signal.removeEventListener('abort', abortXhr)
+        }
+      }
+    }
+
+    xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
+  })
+}
+
+fetch.polyfill = true
+
+if (!self.fetch) {
+  self.fetch = fetch
+  self.Headers = Headers
+  self.Request = Request
+  self.Response = Response
+}
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+
+	Settings: {
+		hostname: "/",
+		debug: false
+	},
+
+	URL: {
+		regiterUser: "ibiography/userinfo/register",
+		fetchUser: "ibiography/userinfo",
+		delUser: "ibiography/userinfo/del",
+		updateUser: "ibiography/userinfo/update"
+	},
+
+	DEBUGURL: {
+		getToken: "test.json"
+	}
+};
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _MutationType$REGISTE;
+
+var _MutationType = __webpack_require__(3);
+
+var MutationType = _interopRequireWildcard(_MutationType);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+exports.default = (_MutationType$REGISTE = {}, _defineProperty(_MutationType$REGISTE, MutationType.REGISTER_USER, function (state, payloay) {
+  debugger;
+}), _defineProperty(_MutationType$REGISTE, MutationType.FETCH_USER, function (state, payloay) {
+  state.UserList = payloay.data.data;
+}), _defineProperty(_MutationType$REGISTE, MutationType.DEL_USERINFO, function (state, payloay) {
+
+  $.each(state.UserList, function (i, item) {
+    if (item._id == payloay.data._id) {
+      state.UserList.splice(i, 1);
+      return false;
+    }
+  });
+}), _MutationType$REGISTE);
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__(1);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueRouter = __webpack_require__(7);
+var _vueRouter = __webpack_require__(17);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-var _Index = __webpack_require__(11);
+var _Index = __webpack_require__(18);
 
 var _Index2 = _interopRequireDefault(_Index);
 
@@ -283,26 +1391,23 @@ var router = new _vueRouter2.default({
 exports.default = router;
 
 /***/ }),
-/* 7 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(70);
 
 /***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_Index_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6f67175f_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_6f67175f_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Index_vue__ = __webpack_require__(20);
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(4)
 /* script */
 
 
@@ -346,7 +1451,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 12 */
+/* 19 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -354,7 +1465,202 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "registerBox" } }, [_vm._v("\n    注册\n")])
+  return _c("div", { attrs: { id: "registerBox" } }, [
+    _c("div", { staticClass: "tBox" }, [
+      _c("div", { staticClass: "header" }, [
+        _vm._v("\r\n            注册\r\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "sItem" }, [
+        _c("span", { staticClass: "title" }, [_vm._v("_id")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.txtId,
+              expression: "txtId"
+            }
+          ],
+          staticClass: "txtName",
+          attrs: { type: "text" },
+          domProps: { value: _vm.txtId },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.txtId = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "sItem" }, [
+        _c("span", { staticClass: "title" }, [_vm._v("用户名")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.txtName,
+              expression: "txtName"
+            }
+          ],
+          staticClass: "txtName",
+          attrs: { type: "text" },
+          domProps: { value: _vm.txtName },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.txtName = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "sItem" }, [
+        _c("span", { staticClass: "title" }, [_vm._v("密码")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.txtPwd,
+              expression: "txtPwd"
+            }
+          ],
+          staticClass: "txtPwd",
+          attrs: { type: "text" },
+          domProps: { value: _vm.txtPwd },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.txtPwd = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "sItem" }, [
+        _c("span", { staticClass: "title" }, [_vm._v("年龄")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.txtAge,
+              expression: "txtAge"
+            }
+          ],
+          staticClass: "txtAge",
+          attrs: { type: "text" },
+          domProps: { value: _vm.txtAge },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.txtAge = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "sItem" }, [
+        _c("span", { staticClass: "title" }, [_vm._v("地址")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.txtAdress,
+              expression: "txtAdress"
+            }
+          ],
+          staticClass: "txtAdress",
+          attrs: { type: "text" },
+          domProps: { value: _vm.txtAdress },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.txtAdress = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "btnSubmit", on: { click: _vm._regSubmit } }, [
+        _vm._v("\r\n            提交\r\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "btnSubmit", on: { click: _vm._updateUser } }, [
+        _vm._v("\r\n            更新\r\n        ")
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "tBox" }, [
+      _c(
+        "ul",
+        _vm._l(_vm.RegisterStore.UserList, function(item, index) {
+          return _c("li", { key: "u_" + index }, [
+            _c("span", { staticClass: "uName" }, [_vm._v(_vm._s(item._id))]),
+            _vm._v(" "),
+            _c("span", { staticClass: "uName" }, [
+              _vm._v(_vm._s(item.userName))
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "upwd" }, [
+              _vm._v(_vm._s(item.passWord))
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "uAge" }, [_vm._v(_vm._s(item.age))]),
+            _vm._v(" "),
+            _c("span", { staticClass: "uAddress" }, [
+              _vm._v(_vm._s(item.address))
+            ]),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                attrs: { title: "删除" },
+                on: {
+                  click: function($event) {
+                    _vm._delUser(item)
+                  }
+                }
+              },
+              [_vm._v("  删除")]
+            )
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "btnFetch", on: { click: _vm._fetchUser } }, [
+        _vm._v("\r\n            获取\r\n        ")
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "tBox" }, [
+      _c("button", { on: { click: _vm._getMe } }, [_vm._v("我是谁")]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm._login } }, [_vm._v("登录")]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm._loginOut } }, [_vm._v("退出")])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -368,13 +1674,13 @@ if (false) {
 }
 
 /***/ }),
-/* 13 */
+/* 21 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 14 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10745,19 +12051,19 @@ return jQuery;
 
 
 /***/ }),
-/* 15 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(72);
 
 /***/ }),
-/* 16 */
+/* 24 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 17 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10782,7 +12088,7 @@ if (false) {
 }
 // CONCATENATED MODULE: ./src/App.vue
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(4)
 /* script */
 var __vue_script__ = null
 /* template */
